@@ -1,6 +1,20 @@
-# **Writeup. Finding Lane Lines on the Road**
+# CarND Finding Lane Lines on the Road Project
 
-## 1. Description of the Pipeline
+[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+
+<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+
+## Project Overview
+
+When we drive, we use our eyes to decide where to go. The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle. Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+
+In this project we will detect lane lines in images using Python and OpenCV. OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
+
+To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining our solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). The code file is called P1.ipynb and the writeup template is writeup_template.md 
+
+Here are the specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+
+## Description of the Pipeline
 
 My pipeline for finding the lane lines consisted of 7 steps:
 **Step 1**. Filter the image by selecting interesting colors, take this test image "solidWhiteRight.jpg" for example, here is its original look:
@@ -54,7 +68,7 @@ Here is the output image with Hough Lines transform based on the image from the 
 
 
 
-## 2. Potential Shortcomings
+## Potential Shortcomings
 I honestly believe every step has its own shortcomings. Here I will just list a few that I can identify.
 
 The **step 1** for filtering the image by selecting interesting colors, some useful colors could be filtered out. In this step, we throw away all the blue colors and red and green colors with lower values. That could have problems in the raining days or in the night, because the light is not very strong, the values of the useful colors could be low and got throw away.
@@ -63,7 +77,7 @@ The **step 5** for selecting only the interesting regions that may include lane 
 
 The **step 6** for detecting lines using the Hough Lines transform and extracting a single line out of the Hough Lines. This feels like the most difficult part of the pipeline, mostly because of the lighting noises. The lighting noises could bring a big impact on the accuracy of the output. The pipeline tries to handle some of the noises, but certainly there are lots of other noises it can't handle. The sources of the noises come from various objects, for example, the shadow of the trees or building alongside the road, the colorful objects on road, the lines of sidewalk, and etc.
 
-## 3. Possible Improvements to the Pipeline
+## Possible Improvements to the Pipeline
 We can probably try to skip **step 1** because all the colors could be useful for identify lanes, at least in some conditions. For example, raining days, the nights, and etc.
 
 We can probably try to skip **step 2** because all the regions could be useful for identify lanes. At least, we should skip step 2 in some special conditions and situations.
